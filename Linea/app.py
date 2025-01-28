@@ -6,7 +6,7 @@
 import argparse
 import funciones
 
-def main(m, b):
+def main(m:float, b:float):
     X = [x/10.5 for x in range(1,101,10)]
     Y = [funciones.calcular_y(x,m,b) for x in X]
     print(X)
