@@ -2,7 +2,7 @@
 Tablero.py dibuja el tablero del juego del gato
 '''
 def dibuja_tablero(simbolos:dict):
-    printf(f'''
+    print(f'''
     {simbolos['1']} | {simbolos['2']} | {simbolos['3']}
     ---------
     {simbolos['4']} | {simbolos['5']} | {simbolos['6']}
