@@ -39,6 +39,26 @@ def usuario(simbolos:dict):
                 print('Esta casilla ya esta ocupada')
 
 
+def juego(simolos:dict):
+    '''Juego del gato'''
+    lista_combinaciones = [
+        ['1','2','3'],
+        ['4','5','6'],
+        ['7','8','9'],
+        ['1','4','7'],
+        ['2','5','8'],
+        ['3','6','9'],
+        ['1','5','9'],
+        ['3','5','7']
+    ]
+
+def checar_ganador(simbolos:dict, combinaciones:list):
+    '''Checar si hay ganador'''
+    for x in combinaciones:
+        if simbolos[x[0]] == simbolos[x[1]] == simbolos[x[2]]:
+            return simbolos[x[0]]
+    return None
+
 if __name__ == '__main__':
     numeros = [str(i) for i in range(1,10)]
     dsimbolos = {x:x for x in numeros}
