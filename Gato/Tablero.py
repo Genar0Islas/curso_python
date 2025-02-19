@@ -39,7 +39,7 @@ def usuario(simbolos:dict):
                 print('Esta casilla ya esta ocupada')
 
 
-def juego(simolos:dict):
+def juego(simbolos:dict):
     '''Juego del gato'''
     lista_combinaciones = [
         ['1','2','3'],
@@ -51,35 +51,67 @@ def juego(simolos:dict):
         ['1','5','9'],
         ['3','5','7']
     ]
+    en_juego = True
+    movimientos = 0
+    dibuja_tablero(simbolos)
+    
+    while en_juego:
+        usuario(simbolos)
+        dibuja_tablero(simbolos)
+        movimientos += 1
+        gana = checa_winner(simbolos, lista_combinaciones)
+        if gana is not None or movimientos == 9:
+            en_juego = False
+            continue
 
-def checar_ganador(simbolos:dict, combinaciones:list):
-    '''Checar si hay ganador'''
-    for x in combinaciones:
-        if simbolos[x[0]] == simbolos[x[1]] == simbolos[x[2]]:
-            return simbolos[x[0]]
+        ia(simbolos)
+        dibuja_tablero(simbolos)
+        movimientos += 1
+        gana = checa_winner(simbolos, lista_combinaciones)
+        if gana is not None or movimientos == 9:
+            en_juego = False
+            continue
+    return gana
+
+
+def checa_winner(simbolos: dict, combinaciones: list):
+    """Checa si hay un ganador"""
+    for c in combinaciones:
+        if simbolos[c[0]] == simbolos[c[1]] == simbolos[c[2]]:
+            return simbolos[c[0]]
     return None
 
+def actauliza_score(score:dict, ganador:str):
+    X = score['X']
+    O = score['O']
+    if ganador is not None:
+        print(f'Ganador: {ganador}')
+        if ganador == 'X':
+            X['G'] += 1
+            O['P'] += 1
+        elif ganador == 'O':
+            O['G'] += 1
+            X['P'] += 1
+        else:
+            print("Empate")
+            X['E'] += 1
+            O['E'] += 1
+    else:
+        print("Empate")
+        X['E'] += 1
+        O['E'] += 1
+
+def desplegar_score(score:dict):
+    print(f'''
+    X: Ganados: {score['X']['G']} Perdidos: {score['X']['P']} Empatados: {score['X']['E']}
+    O: Ganados: {score['O']['G']} Perdidos: {score['O']['P']} Empatados: {score['O']['E']}
+    ''')
+
 if __name__ == '__main__':
-    numeros = [str(i) for i in range(1,10)]
-    dsimbolos = {x:x for x in numeros}
-    dibuja_tablero(dsimbolos)
-    ia(dsimbolos)
-    dibuja_tablero(dsimbolos)
-    usuario(dsimbolos)
-    dibuja_tablero(dsimbolos)
-
-
-
-
-
-    '''
-    x = random.choice(numeros)
-    numeros.remove(x)
-    dsimbolos[x] = 'X'
-    dibuja_tablero(dsimbolos)
-
-    o = random.choice(numeros)
-    numeros.remove(o)
-    dsimbolos[o] = 'O'
-    dibuja_tablero(dsimbolos) 
-    '''
+        numeros = [str(i) for i in range(1,10)]
+        dsimbolos = {x: x for x in numeros}
+        ganador = juego(dsimbolos)
+        if ganador is None:
+            print("Empate")
+        else:
+            print(f"El ganador es {ganador}")
