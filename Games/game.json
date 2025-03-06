@@ -1,0 +1,24 @@
+{
+    "A": {
+        "name": "Dream Team",
+        "sport": {
+            "name": "Basketball",
+            "players": 5,
+            "league": "NBA"
+        },
+        "players": []
+    },
+    "B": {
+        "name": "Crazy Team",
+        "sport": {
+            "name": "Basketball",
+            "players": 5,
+            "league": "NBA"
+        },
+        "players": []
+    },
+    "score": {
+        "Dream Team": 56,
+        "Crazy Team": 80
+    }
+}
